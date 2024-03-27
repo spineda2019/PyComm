@@ -1,39 +1,39 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(libserial DESCRIPTION "Serial Communication Library")
+project(pycomm DESCRIPTION "Communication Module for Python")
 
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 
-set(SERIAL_SOURCES
-    "src/SerialMessenger.cpp")
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs REQUIRED)
 
-add_library(serial ${MODULE_BUILD_TYPE} ${SERIAL_SOURCES})
+set(PY_SOURCES
+    "src/pycomm.c")
 
-target_include_directories("src/include")
+add_library(pycomm ${MODULE_BUILD_TYPE} ${PY_SOURCES})
 
-if (MSVC)
-  # for some reason this is required for MVSC, but this isn't valid or correct
-  # otherwise?
-  target_link_libraries(serial PRIVATE
-    Boost::system
-    Boost::asio)
-else()
-  target_link_libraries(serial PRIVATE
-    ${Boost_LIBRARIES})
-endif()
+set_target_properties(
+    pycomm
+    PROPERTIES
+        PREFIX ""
+        OUTPUT_NAME "pycomm"
+        LINKER_LANGUAGE C
+    )
+
+target_include_directories(pycomm PUBLIC "src/include")
 
 if (MSVC)
   # MSVC warns for things in system includes (e.g. STL, boost, etc.), so /WX
   # is not viable (/Wall already results in thousands of warnings)
   #$<$<CONFIG:Release>:/WX>
-  target_compile_options(serial PRIVATE /W3)
+  target_compile_options(pycomm PRIVATE /W3)
 else()
-  target_compile_options(serial PRIVATE
+  target_compile_options(pycomm PRIVATE
     -W -Wall -pedantic -Wextra
     $<$<CONFIG:Release>:-Werror>
   )
 endif()
 
-install(TARGETS serial)
-install(DIRECTORY "include/serial" DESTINATION "include")
+install(TARGETS pycomm)
+install(DIRECTORY "include/pycomm" DESTINATION "include")
