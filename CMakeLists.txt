@@ -52,4 +52,4 @@ endif()
 ################################################################################
 add_subdirectory("ethernet")
 add_subdirectory("serial")
-# add_subdirectory("python_module")
+add_subdirectory("python_module")
