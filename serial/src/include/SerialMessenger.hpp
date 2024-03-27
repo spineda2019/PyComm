@@ -22,6 +22,9 @@ namespace sp {
 class SerialMessenger {
  public:
     explicit SerialMessenger(std::uint8_t port);
+
+ private:
+    std::uint8_t port_;
 };
 }  // namespace sp
 
