@@ -13,3 +13,16 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
+#ifndef SERIAL_SRC_INCLUDE_SERIALMESSENGER_HPP_
+#define SERIAL_SRC_INCLUDE_SERIALMESSENGER_HPP_
+#include <cstdint>
+namespace sp {
+
+class SerialMessenger {
+ public:
+    explicit SerialMessenger(std::uint8_t port);
+};
+}  // namespace sp
+
+#endif  // SERIAL_SRC_INCLUDE_SERIALMESSENGER_HPP_
