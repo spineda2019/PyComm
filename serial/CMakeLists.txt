@@ -10,7 +10,8 @@ set(SERIAL_SOURCES
 
 add_library(serial ${MODULE_BUILD_TYPE} ${SERIAL_SOURCES})
 
-target_include_directories(serial PUBLIC "src/include")
+message("Targetting include dir: ${BOOST_INCLUDE_DIR}")
+target_include_directories(serial PUBLIC "src/include" ${Boost_INCLUDE_DIR})
 
 if (MSVC)
   # for some reason this is required for MVSC, but this isn't valid or correct
