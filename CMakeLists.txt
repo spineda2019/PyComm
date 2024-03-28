@@ -29,7 +29,7 @@ include(FetchContent)
 
 find_package(Boost COMPONENTS system)
 if (NOT Boost_FOUND)
-  message(FATAL "Please ensure boost is installed")
+    message(FATAL_ERROR "Please ensure boost is installed")
 endif()
 
 message("Boost Include Directory Found At: ${Boost_INCLUDE_DIR}")

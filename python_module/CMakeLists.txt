@@ -8,7 +8,7 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 find_package(Python COMPONENTS Interpreter Development)
 
 if(NOT Python_FOUND)
-    message(FATAL "Python not found! Ensure it is installed")
+    message(FATAL_ERROR "Python not found! Ensure it is installed")
 else()
     message("Python include dirs found @ ${Python_INCLUDE_DIRS}")
 endif()
