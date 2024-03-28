@@ -16,15 +16,19 @@
 
 #ifndef SERIAL_SRC_INCLUDE_SERIALMESSENGER_HPP_
 #define SERIAL_SRC_INCLUDE_SERIALMESSENGER_HPP_
-#include <cstdint>
+#include <string_view>
+
+#include "boost/asio/io_context.hpp"
+#include "boost/asio/serial_port.hpp"
 namespace sp {
 
 class SerialMessenger {
  public:
-    explicit SerialMessenger(std::uint8_t port);
+    explicit SerialMessenger(const std::string_view port);
 
  private:
-    std::uint8_t port_;
+    boost::asio::io_context boost_context_;
+    boost::asio::serial_port boost_port_;
 };
 }  // namespace sp
 
